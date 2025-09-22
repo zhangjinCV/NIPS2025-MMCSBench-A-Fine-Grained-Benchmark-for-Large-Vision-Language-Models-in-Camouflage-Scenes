@@ -1,0 +1,45 @@
+# Default configuration for MMCSBench
+data_dir: "data/"
+output_dir: "results/"
+
+# Dataset configuration
+dataset:
+  name: "camouflage_scenes"
+  splits: ["train", "val", "test"]
+  image_size: [224, 224]
+  
+# Evaluation configuration
+evaluation:
+  metrics:
+    detection: ["mAP", "precision", "recall", "f1_score"]
+    classification: ["accuracy", "top5_accuracy", "macro_f1", "weighted_f1"]
+    reasoning: ["accuracy", "bleu_score", "rouge_l", "cider_score"] 
+    description: ["bleu_1", "bleu_4", "meteor", "cider", "rouge_l"]
+  
+  batch_size: 32
+  num_workers: 4
+
+# Task configuration
+tasks:
+  detection:
+    enabled: true
+    difficulty_levels: ["easy", "medium", "hard"]
+    
+  classification:
+    enabled: true
+    categories: ["animal", "military", "adaptive", "natural"]
+    
+  reasoning:
+    enabled: true
+    question_types: ["factual", "inferential", "counterfactual"]
+    
+  description:
+    enabled: true
+    max_length: 256
+
+# Model configuration
+models:
+  default_config:
+    device: "cuda"
+    precision: "fp16"
+    batch_size: 8
